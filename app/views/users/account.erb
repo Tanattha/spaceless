@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+  <body>
+    <a href="/posts">Posts</a>
+    <a href="/assignments">Assignments</a>
+    <a href="/group">Group</a>
+    <a href="/logout">Log Out</a> <br>
+    Welcome <%= @user.first_name %> <br>
+    <------------Course/Assignment----------->
+    <br>
+    <% if @user.course_id.to_i > 0 %>
+      You are in course: <%= @user_course.name %> <br>
+      <% if @user_assignment %>
+        Currently Assignment : <%= @user_assignment.name %><br>
+      <% else %>
+        <p>You haven no assignment.</p>
+      <% end %>
+    <% else %>
+      <p>You haven't assigned course yet!</p>
+    <% end %>
+   
+    <br>
+  </body>
+</html>

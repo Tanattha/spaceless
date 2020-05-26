@@ -1,0 +1,9 @@
+.uk-add-business {
+    background: url('https://www.carbonbrief.org/wp-content/uploads/2018/10/ocean-sunrays.jpg') no-repeat bottom center;
+  }
+  .uk-button-default:hover, .uk-button-default:focus {
+    border-color: transparent;
+  }
+  .uk-button-default {
+    border: transparent;
+  }

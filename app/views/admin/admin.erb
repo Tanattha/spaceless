@@ -1,0 +1,11 @@
+<form method="post" action="/approved">
+<% @show_all.each do |student| %>
+<% if student.assignment_status == false %>
+<%= student.first_name %> <%= student.last_name %><br>
+<%= student.course_id %><br>
+<%= student.assignment %><br>
+content..<br>
+<input type="submit" value="approved"><br><br>
+<% end %>
+<% end %>
+</form>

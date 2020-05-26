@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+  <body>
+    <a href="/account">Back to Account</a>
+    <a href="/board">Board</a>
+    <a href="/group">Group</a>
+    <a href="/logout">Log Out</a>
+    <br>
+    User : <%= @user_assignment.first_name %>
+    <br>
+    <% if @user_assignment.assignment_status == false %>
+      waiting for your instructor review...
+    <% else %>
+      <br>
+      <form action="/submit_assignment/<%= @user_assignment.id %>" method="POST">
+        <input type="hidden" id="hidden" name="_method" value="patch"/>
+        Currently Assignment : <%= @show_assignment.name %>
+        <br>
+        <br>
+        <%= @show_assignment.detail %>
+        <br>
+        <br>
+        <input type="submit" value="submit" >
+      <% end %>
+    </form>
+  </body>
+</html>
