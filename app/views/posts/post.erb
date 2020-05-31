@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+  <body>
+    <% if logged_in? %>
+      <div  class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-secondary"
+              data-src="../images/board2.jpg"
+              data-sizes="(min-width: 650px) 650px, 100vw" uk-img>
+        <ul><br>
+          <h1 id="center_white"> Welcome to our community. </h1>
+        </ul>
+      </div>
+      <br>
+      <div style="background-image: url(../images/post-bg.jpg)">
+        <div class="uk-container">
+
+          <div class="uk-text-left" uk-grid>
+
+            <div class="uk-width-1-4" >
+            <br>
+              <div class="uk-grid-small uk-flex-middle" style="color:white" uk-grid>
+                <div>
+                  <img class="uk-border-circle" width="40" height="40" src="https://getuikit.com/docs/images/avatar.jpg">
+                </div>
+                <ul>
+                  <div class="uk-width-1-1">
+                    <h5 id="center_white"  class="uk-margin-remove-bottom"><%= @user.first_name %></h5>
+                  </div>
+                </ul>
+                <div>
+                </div>
+                <p> Course : <%= @user.course.name %> </p>
+                <p> Email : <%= @user.email %> </p>
+                <p> We have <%= @user.course.posts.size %> post(s) so far! </p>
+                <br>
+              </div>
+            </div>
+            <div class="uk-width-3-4">
+              <br>
+              <div class="boundary-align uk-panel uk-placeholder bg white" >
+                <p class="uk-body-default uk-float-left ">Start sharing something here...</p>
+                <div uk-drop="mode: click; pos: bottom-justify; boundary: .boundary-align; boundary-align: true">
+                  <div class="uk-card uk-card-body uk-card-default ">
+                    <form action='/create' method="POST">
+                      <p> <span class="uk-margin-small-right" uk-icon="file-edit"></span> What would you like to share? </p>
+                      <div class="uk-margin">
+                        <input class="uk-input" type="text" name="new_title" id="new_title" placeholder="Title">
+                      </div>
+                      <div class="uk-margin">
+                        <textarea class="uk-textarea" rows="3" name="new_content" id="new_content" placeholder="start right here..."></textarea>
+                      </div>
+                      <div class="uk-modal-footer uk-text-right">
+                        <button class="uk-button-small bg" id="center_white" type="submit">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+             
+              <!-----POSTS---->
+              <% @user.course.posts.each do |detail| %>
+                <div class="uk-card uk-card-default">
+                  <!-- HEADER ---->
+                  <div class="uk-card-header bg" style="color: white" >
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                      <div>
+                        <img class="uk-border-circle" width="40" height="40" src="https://getuikit.com/docs/images/avatar.jpg">
+                      </div>
+                      <ul>
+                        <div class="uk-width-1-1">
+                          <h5 style="color: white" class="uk-margin-remove-bottom"><%= detail.title %></h5>
+                          <p id="small" >Created by : <%=detail.user.first_name %>,
+                            <%= detail.created_at.strftime("%m/%Y/%d %l:%M %p %Z") %></p>
+                        </div>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!----HEADER---->
+                  <!----BODY------>
+                  <div class="uk-card-body"  >
+                    <p><%= detail.content %></p>
+                  </div>
+                  <!-----BODY----->
+                  <!-- FOOTER ---->
+                  <% if detail.user_id.to_i == @user.id.to_i %>
+                    
+                    <div class="uk-card-footer boundary-align uk-panel uk-placeholder">                    
+                      <button class="uk-button uk-button-default uk-float-left" type="button" uk-icon="icon: file-edit"></button>
+                      <div uk-drop="mode: click; pos: bottom-justify; boundary: .boundary-align; boundary-align: true">
+                        <div class="uk-card uk-card-body uk-card-default">
+                          
+                          <form action="/edit/<%= detail.id %>" method="POST">
+                            <input type="hidden" id="hidden" name="_method" value="patch"/>
+                            <fieldset class="uk-fieldset">
+                            <div class="uk-margin">
+                              <input class="uk-input" type="text" name="edit_title" id="edit_title" value="<%= detail.title %>"/>
+                            </div>
+                            <div class="uk-margin">
+                                <textarea class="uk-textarea" rows="5" name="edit_content" id="edit_content"> <%= detail.content %></textarea>
+                            </div>
+                            </fieldset>
+                            <button class="uk-button-small uk-align-right bg" id="center_white" type="submit">Update</button>
+                          </form>
+                        </div>
+                      </div>
+                      <button class="uk-button uk-button-default" " uk-icon="icon: trash"></button>
+                      <div uk-drop="mode: click; bottom-justify; boundary: .boundary-align; boundary-align: true">                       
+                      <div class="uk-card uk-card-body uk-card-default" >
+                          <form action="/delete/<%= detail.id %>" method="POST">
+                            <input type="hidden" id="hidden" name="_method" value="delete"/>
+                            <p id="center"> Comfirm delete this post?
+                            <p id="center"><button class="uk-button-small bg" id="center_white" type="submit">Delete</button></p>
+                          </form>
+                      </div>
+                      </div>
+                    </div>
+
+                 
+                   <% end %>
+                  <!----FOOTER------>
+
+                </div>
+              <%end%>
+              <!-----POSTS---->
+            </div>
+
+          </div>
+
+        </div>
+        </div>
+      <% else %>
+        <a href="/signup">Sign Up</a>
+        <a href="/login"> Sign In </a>
+      <%end %>
+    </body>
+  </html>

@@ -6,9 +6,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :email
       t.string :username
       t.string :password_digest
-      t.string :course_id, :default => 0
-      t.string :assignment_id, :default => 0
-      t.boolean :assignment_status, :default => true
+      t.integer :course_id, :default => 0
       t.timestamps
     end
   end

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+  <body>
+    <% if logged_in? %>
+      <br>
+      <div class="uk-section uk-background-cover" style="background-image: url(../images/bg.jpg">
+        <div class="uk-container  ">
+          <div class="uk-panel uk-light uk-margin-medium" >
+            <h1>
+              <span class="uk-margin-small-right" uk-icon="file-edit"></span>Assignments</h1>
+          </div>
+          <div class="uk-grid-match uk-child-width-expand@m" uk-grid>
+            <div >
+              <div class="uk-card uk-card-body bg" style="font-color: black">
+                <ul style="color:white">
+                  <li >Title : <%= @assignment.assignment.name %> </li>
+                  <p>Detail : <%= @assignment.assignment.detail %> </p>
+                  <p id="small">Created on : <%= @assignment.created_at.strftime("%m/%Y/%d %l:%M %p %Z") %> </p>
+                  <p id="small">Last Updated : <%= @assignment.updated_at.strftime("%m/%Y/%d %l:%M %p %Z") %></p>
+                </ul>
+              </div>
+            </div>
+            <div>
+            
+              <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                <% if @assignment.status == true %>
+                  <h3 style="color:red">You passed</h3>
+                  <p><%= @assignment.note %>
+                    <h1>
+                    <% else %>
+                      <form>
+                        <fieldset class="uk-fieldset">
+                          <legend class="uk-legend">Finish your assignment here :</legend>
+                          <div class="uk-margin">
+                          <form method="post" action="/edit_assignment/<%=@assignment.id%>">
+                            <textarea class="uk-textarea" rows="10" name="edit_note"  id="edit_note" placeholder="Please fill in this form."></textarea>
+                          </div>
+                          <div class="uk-modal-footer uk-text-right">
+                            
+                              <button class="uk-button uk-button-primary"  type="submit">Submit</button>
+                            </div>
+                          </form>
+                        </fieldset>
+                      </form>
+                      <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <a href="/signup">Sign Up</a>
+              <a href="/login"> Sign In </a>
+            <%end %>
+          </body>
+        </html>

@@ -1,8 +1,7 @@
-  require './config/environment'
-
+require './config/environment'
 
 use Rack::MethodOverride 
-use AccountsController
+use AssignmentsController
 use UsersController
 use PostsController
 use AdminController

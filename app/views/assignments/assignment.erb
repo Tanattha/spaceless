@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+  <body>
+    <% if logged_in? %>
+      <br>
+      <div class="uk-section uk-background-cover" style="background-image: url(../images/bg.jpg)">
+        <div class="uk-container  ">
+          <div class="uk-panel uk-light uk-margin-medium" >
+            
+          <h1>
+           <span class="uk-margin-small-right" uk-icon="file-edit"></span>Assignments</h1>
+           
+              
+          </div>
+          <div class="uk-grid-match uk-child-width-expand@m" uk-grid>
+            <div>
+              <div class="uk-card uk-card-default uk-card-body">
+              
+                <% if !@number_assignment.empty? %>
+                  <p>Passed Assignment(s)</p>
+                  <ul>
+                    <% @number_assignment.each do |s| %>
+                      <li><%= s.assignment.name %></li>
+                      <br>
+                    <% end %>
+                  <% else %>
+                    <li style="color:red"> You haven't passed any assignment yet.</li>
+                  </ul>
+                  <% end %>
+                </div>
+              </div>
+            
+
+            <div>
+              <div class="uk-card uk-card-default uk-card-body">
+                <p>On process Assignment(s)</p>
+                <ul>
+                  <% @user.course.assignments.each do |assignment| %>
+                    <% if assignment.status == true %>
+                      <li> <a href="/edit_assignment/<%= assignment.id %>" ><%= assignment.name %></a>
+                        <p id="small"> Last Updated : <%= assignment.updated_at.strftime("%m/%Y/%d %l:%M %p %Z") %> </p>
+                      </li>
+                      <br>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <a href="/signup">Sign Up</a>
+        <a href="/login"> Sign In </a>
+      <%end %>
+    </body>
+  </html>

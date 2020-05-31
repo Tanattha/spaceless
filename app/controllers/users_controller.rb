@@ -1,68 +1,92 @@
-require 'pry'
 class UsersController < ApplicationController
 
-  get "/" do
-    erb :index
-  end
-
   get "/signup" do
-    erb :'users/signup'
+    if logged_in?
+      redirect to '/login'
+    else
+      erb :'users/signup'
+    end
   end
   
-  post "/signup" do
-    if params[:username] == "" || params[:password] == ""
-      redirect '/failure'
+  post '/signup' do
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      flash[:message] = "All contents can't be blank or Username is already in use."
+      redirect to '/signup'
     else
-      User.create(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], username: params[:username], password: params[:password])
-      session[:user_id] = user.id
-      redirect '/account'
+     # @user = User.create(:first_name => params[:first_name], :last_name => params[:last_name], :username => params[:username], :email => params[:email], :password => params[:password])  
+    @user =  User.new(first_name: params[:first_name], last_name: params[:last_name], username: params[:username], email: params[:email], password: params[:password])  
+    @user.save
+    if @user.save
+    binding.pry
+    session[:user_id] = @user.id
+      redirect to '/account'
+    else
+      binding.pry
+    end
+  end
+end
+
+  get "/login" do
+    if logged_in?
+      redirect to '/account'
+    else
+      erb :'users/login'
     end
   end
 
-  get "/login" do
-    erb :'users/login'
-  end
-
   post "/login" do
-     user = User.find_by(username: params[:username])
+    user = User.find_by(username:  params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect '/account'
     else
-      redirect '/failure'
+      flash[:message] = "Invalid username or password."
+      redirect '/login'
     end
   end
 
-  get '/admin' do
-    @show_all = User.all
-    erb :'admin/admin'
-  end
-
   get '/account' do
-    @user = current_user
-    @user_course = Course.find_by_id(@user.course_id)
-    @user_assignment = Assignment.find_by_id(@user.assignment_id)
-    binding.pry
-    erb :'users/account'
+    if logged_in?
+      @user = current_user
+      erb :'users/account'
+    else
+      redirect to '/login'
+    end
   end
 
-  get "/failure" do
-    erb :'users/failure'
-  end
-
-  get "/posts" do
-    redirect 'posts/index_post'
+  get '/logout' do
+    session.destroy
+    flash[:message] = "Logged out successfully."
+    redirect to '/'
   end
 
   get "/group" do
     @user = current_user
     @user_group = User.where(course_id: @user.course_id)
-    erb :'group/index_group'
+    erb :'group/group'
   end
 
-  get "/logout" do
-    session.clear
-    redirect "/"
+
+  patch '/random/:id' do
+    @user = current_user
+
+    if @user.course_id.to_i == 0
+      random_course = Random.rand(1...4)
+      @user.update(course_id: random_course)
+      @user.save 
+      redirect to '/account'
+    else
+      redirect to '/account'
+      flash[:message] = "You already assigned course."
+    end
+  end
+
+  get '/admin' do
+    if logged_in?
+      erb :'admin/admin'
+    else
+      redirect to '/login'
+    end
   end
 
 end

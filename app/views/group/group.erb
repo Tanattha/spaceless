@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+  <body>
+    <% if logged_in? %>
+      <div class="uk-container">
+        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+          <div class="uk-card-media-left uk-cover-container">
+            <img src="../images/group.jpg" alt="" uk-cover>
+            <canvas width="600" height="400"></canvas>
+          </div>
+          <div>
+            <div class="uk-card-body">
+              <h3 class="uk-card-title">Group : <%= @user.course.name %> </h3>
+              <p>Keep in touch with your friends.</p>
+              <hr class="uk-divider-icon ">
+              <ul class="uk-list uk-list-divider">
+                <% @user_group.each do |member| %>
+                  <li> <%= member.first_name %></li>
+                  <p><a href="mailto:<%= member.email %>" > <%= member.email %></a></p>
+                <%end%>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <a href="/signup">Sign Up</a>
+      <a href="/login"> Sign In </a>
+    <%end %>
+  </body>
+</html>

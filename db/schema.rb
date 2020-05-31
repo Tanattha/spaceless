@@ -10,16 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200526020827) do
+ActiveRecord::Schema.define(version: 20200527142721) do
 
   create_table "assignments", force: :cascade do |t|
     t.string "name"
     t.text "detail"
+    t.boolean "status", default: false
     t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
+    t.string "detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -31,9 +37,21 @@ ActiveRecord::Schema.define(version: 20200526020827) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "school", force: :cascade do |t|
+  create_table "schools", force: :cascade do |t|
     t.integer "user_id"
     t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_assignments", force: :cascade do |t|
+    t.integer "assignment_id"
+    t.integer "user_id"
+    t.integer "course_id"
+    t.boolean "status", default: false
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,9 +60,7 @@ ActiveRecord::Schema.define(version: 20200526020827) do
     t.string "email"
     t.string "username"
     t.string "password_digest"
-    t.string "course_id", default: "0"
-    t.string "assignment_id", default: "0"
-    t.boolean "assignment_status", default: true
+    t.integer "course_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

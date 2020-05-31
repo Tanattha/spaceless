@@ -1,10 +1,74 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
 <head>
-  <title>Spaceless Tutoring</title>
+  <title>SPACELESS</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <!-- UIkit CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/css/uikit.min.css" />
+  <!-- UIkit JS -->
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/js/uikit-icons.min.js"></script>
+  <style>
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      font-family: Tahoma;
+      font-size: 23px;
+    }
+    p {
+      font-family: Tahoma;
+      font-size: 15px;
+    }
+    #small {
+        font-size: 10px;
+      }
+    #center_white {
+      text-align: center;
+      color: white;
+    }
+    #center {
+      text-align: center;
+    }
+    .bg {
+      background-color: #42B6E1;
+    }
+    .white{
+      color: white;
+    }
+  </style>
 </head>
+<html>
   <body>
-  
-    <%= yield %>
-  </body>
+    <nav class="uk-navbar-container" uk-navbar style="background-color: #48BFEB">
+      <div class="uk-navbar-left">
+        <ul class="uk-navbar-nav">
+          <li class="uk-active"><a href="/" uk-icon="icon: home"></a></li>
+          <li class="uk-active"><a href="/account">Profile</a></li>
+          <li class="uk-active"><a href="/assignments">Assignment</a></li>
+          <li class="uk-active"><a href="/posts">Board</a></li>
+          <li class="uk-active"><a href="/group">Group</a></li>
+        </ul>
+      </div>
+      <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+          <li class="uk-active"><a href="https://www.facebook.com/spacelesstutoring" uk-icon="icon: facebook"></a></li>
+          <li class="uk-active"><a href="mailto:spaceless.tutoring@gmail.com" uk-icon="icon: mail"></a></li>
+          <li class="uk-active"><a href="/logout" uk-icon="icon: sign-out"></a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="footer">
+      <div class="uk-section-secondary uk-light"  style="height: 20px">
+        <p class="uk-icon="icon: facebook">Created by : Tanattha Thuenim <a href="https://github.com/Tanattha" uk-icon="icon: github"></a></p>
+      </div>
+    </div>
+    <% if flash.has?(:message) %>
+      <p style="color:red;"><%= flash[:message] %> </p>
+    <% end %>
+  </div>
+  <%= yield %>
+</body>
 </html>
