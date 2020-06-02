@@ -3,32 +3,40 @@ class AssignmentsController < ApplicationController
     get '/assignments' do
         if logged_in?
             @user = current_user
-            @number_assignment = @user.user_assignments.where(status: true)
+            @passed_assignment = @user.user_assignments.where(status: true)
+            @on_process_assignment = @user.course.assignments.where.not(id: @passed_assignment.ids)
+            
             erb :'assignments/assignment'
         else
             redirect to '/login'
         end
     end
 
+
     get '/edit_assignment/:id' do
         if logged_in?
             @user = current_user
+            
             @assignment = UserAssignment.find_or_create_by(assignment_id: params[:id], user_id: @user.id, course_id: @user.course_id)
+           
             erb :'assignments/start_edit_assignment'
         else
             redirect to '/login'
         end
       end
 
+    
     patch '/edit_assignment/:id' do
+      
         if logged_in?
-            update_assignment = UserAssignment.find_by_id(params[:id]) 
+            @user = current_user
+            update_assignment = UserAssignment.find_by_id(params[:id])
             update_assignment.update(note: params[:edit_note])
             update_assignment.save
             flash[:message] = "Saved Successfully"
             redirect to '/assignments' 
         else
-        redirect to '/login'
+            redirect to '/login'
       end
     end
 

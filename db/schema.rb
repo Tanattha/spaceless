@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20200527142721) do
 
   create_table "assignments", force: :cascade do |t|
     t.string "name"
-    t.text "detail"
+    t.string "detail"
     t.boolean "status", default: false
     t.integer "course_id"
     t.datetime "created_at", null: false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20200527142721) do
     t.integer "user_id"
     t.integer "course_id"
     t.boolean "status", default: false
-    t.text "note"
+    t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

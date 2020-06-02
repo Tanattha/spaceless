@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <head>
   <title>SPACELESS</title>
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <!-- UIkit CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/css/uikit.min.css" />
   <!-- UIkit JS -->
@@ -35,28 +35,72 @@
     .bg {
       background-color: #42B6E1;
     }
+    .white-bg{
+      background-color:white;"
+    }
     .white{
       color: white;
+    }
+    .blue-bg {
+      background-color: #42B6E1;
+    }
+    blue {
+      color: #42B6E1;
     }
   </style>
 </head>
 <html>
   <body>
+  
     <nav class="uk-navbar-container" uk-navbar style="background-color: #48BFEB">
       <div class="uk-navbar-left">
         <ul class="uk-navbar-nav">
-          <li class="uk-active"><a href="/" uk-icon="icon: home"></a></li>
+          <li class="uk-active"><a href="/"><img  width="70" height="70" src="../images/logo.png" ></a></li>
           <li class="uk-active"><a href="/account">Profile</a></li>
           <li class="uk-active"><a href="/assignments">Assignment</a></li>
           <li class="uk-active"><a href="/posts">Board</a></li>
-          <li class="uk-active"><a href="/group">Group</a></li>
+          <li class="uk-active"><a href="/group">Contact</a></li>
         </ul>
       </div>
       <div class="uk-navbar-right">
         <ul class="uk-navbar-nav">
           <li class="uk-active"><a href="https://www.facebook.com/spacelesstutoring" uk-icon="icon: facebook"></a></li>
           <li class="uk-active"><a href="mailto:spaceless.tutoring@gmail.com" uk-icon="icon: mail"></a></li>
-          <li class="uk-active"><a href="/logout" uk-icon="icon: sign-out"></a></li>
+         
+          <% if logged_in? %>
+            <li class="uk-active"><a href="/logout" uk-icon="icon: sign-out"></a></li>
+          <% else %>
+            <li class="uk-active"><a href="#modal-login" uk-icon="icon: sign-in" uk-toggle></a></li>
+<!--log in start--->                
+          <div id="modal-login" uk-modal>
+          <div class="uk-modal-dialog">
+
+          <div class="uk-modal-header bg">
+           <h4 class="white"><span class="uk-margin-small" uk-icon="sign-in"></span> LOG IN</h4></a>
+          </div>
+          
+          <div class="uk-modal-body ">
+
+            <form action="/login" method="POST">
+              <fieldset class="uk-fieldset">
+              <div class="uk-margin">
+                <input class="uk-input" type="text" name="username" id="usernmae"  placeholder="Username:">
+              </div>
+              <div class="uk-margin">
+                <input class="uk-input" type="text" name="password" id="password" placeholder="Password:">
+              </div>
+              </fieldset>
+          
+          <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <button class="uk-button uk-button-primary" type="submit">Submit</button>
+          </div>
+          </form> 
+          </div>       
+          </div>    
+          </div>
+<!--log in end-----> 
+          <% end %>
         </ul>
       </div>
     </nav>

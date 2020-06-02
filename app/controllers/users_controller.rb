@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if logged_in?
       redirect to '/login'
     else
-      erb :'users/signup'
+      erb :index
     end
   end
   
@@ -13,18 +13,15 @@ class UsersController < ApplicationController
       flash[:message] = "All contents can't be blank or Username is already in use."
       redirect to '/signup'
     else
-     # @user = User.create(:first_name => params[:first_name], :last_name => params[:last_name], :username => params[:username], :email => params[:email], :password => params[:password])  
-    @user =  User.new(first_name: params[:first_name], last_name: params[:last_name], username: params[:username], email: params[:email], password: params[:password])  
-    @user.save
-    if @user.save
-    binding.pry
-    session[:user_id] = @user.id
-      redirect to '/account'
-    else
-      binding.pry
+      @user = User.create(:first_name => params[:first_name], :last_name => params[:last_name], :username => params[:username], :email => params[:email], :password => params[:password])  
+        if @user.save
+          session[:user_id] = @user.id
+          redirect to '/account'
+        else
+          erb :'users/signup'
+        end
     end
   end
-end
 
   get "/login" do
     if logged_in?
@@ -65,7 +62,6 @@ end
     @user_group = User.where(course_id: @user.course_id)
     erb :'group/group'
   end
-
 
   patch '/random/:id' do
     @user = current_user

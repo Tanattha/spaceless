@@ -6,7 +6,7 @@
               data-src="../images/board2.jpg"
               data-sizes="(min-width: 650px) 650px, 100vw" uk-img>
         <ul><br>
-          <h1 id="center_white"> Welcome to our community. </h1>
+          <h1 id="center_white"> Welcome to SPACLESS's community. </h1>
         </ul>
       </div>
       <br>
@@ -30,7 +30,7 @@
                 </div>
                 <p> Course : <%= @user.course.name %> </p>
                 <p> Email : <%= @user.email %> </p>
-                <p> We have <%= @user.course.posts.size %> post(s) so far! </p>
+                <p> You created <%= @user.posts.size %> post(s) so far! </p>
                 <br>
               </div>
             </div>
@@ -55,7 +55,7 @@
                   </div>
                 </div>
               </div>
-             
+       
               <!-----POSTS---->
               <% @user.course.posts.each do |detail| %>
                 <div class="uk-card uk-card-default">

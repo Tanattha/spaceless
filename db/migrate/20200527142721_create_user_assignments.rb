@@ -5,7 +5,7 @@ class CreateUserAssignments < ActiveRecord::Migration[5.1]
       t.integer :user_id
       t.integer :course_id
       t.boolean :status, :default => 0
-      t.text :note
+      t.string :note
       t.timestamps
     end
   end
