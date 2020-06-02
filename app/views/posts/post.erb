@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html>
   <body>
-    <% if logged_in? %>
       <div  class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-secondary"
               data-src="../images/board2.jpg"
               data-sizes="(min-width: 650px) 650px, 100vw" uk-img>
@@ -26,11 +25,12 @@
                     <h5 id="center_white"  class="uk-margin-remove-bottom"><%= @user.first_name %></h5>
                   </div>
                 </ul>
-                <div>
+
                 </div>
+                <div class="white"><br>
                 <p> Course : <%= @user.course.name %> </p>
-                <p> Email : <%= @user.email %> </p>
-                <p> You created <%= @user.posts.size %> post(s) so far! </p>
+                <p> Total posts : <%= @number_posts %> post(s). </p>
+                <p> You created <%= @user.posts.size %> post(s). </p>
                 <br>
               </div>
             </div>
@@ -56,15 +56,17 @@
                 </div>
               </div>
        
-              <!-----POSTS---->
+<!---posts start---->
               <% @user.course.posts.each do |detail| %>
                 <div class="uk-card uk-card-default">
-                  <!-- HEADER ---->
+<!-- header end ---->
                   <div class="uk-card-header bg" style="color: white" >
                     <div class="uk-grid-small uk-flex-middle" uk-grid>
+                    
                       <div>
                         <img class="uk-border-circle" width="40" height="40" src="https://getuikit.com/docs/images/avatar.jpg">
                       </div>
+
                       <ul>
                         <div class="uk-width-1-1">
                           <h5 style="color: white" class="uk-margin-remove-bottom"><%= detail.title %></h5>
@@ -72,16 +74,17 @@
                             <%= detail.created_at.strftime("%m/%Y/%d %l:%M %p %Z") %></p>
                         </div>
                       </ul>
+
                     </div>
                   </div>
 
-                  <!----HEADER---->
-                  <!----BODY------>
+<!----header end---->
+<!----body start---->
                   <div class="uk-card-body"  >
                     <p><%= detail.content %></p>
                   </div>
-                  <!-----BODY----->
-                  <!-- FOOTER ---->
+<!-----body end----->
+<!-- footer start -->
                   <% if detail.user_id.to_i == @user.id.to_i %>
                     
                     <div class="uk-card-footer boundary-align uk-panel uk-placeholder">                    
@@ -117,20 +120,15 @@
 
                  
                    <% end %>
-                  <!----FOOTER------>
-
+<!----footer end---->
                 </div>
               <%end%>
-              <!-----POSTS---->
+<!-----posts end---->
             </div>
 
           </div>
 
         </div>
         </div>
-      <% else %>
-        <a href="/signup">Sign Up</a>
-        <a href="/login"> Sign In </a>
-      <%end %>
-    </body>
-  </html>
+  </body>
+</html>

@@ -1,26 +1,21 @@
 <!DOCTYPE HTML>
 <html>
   <body>
-    <% if logged_in? %>
-      <br>
-
-
-     <div  class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-secondary"
+    <br>
+    <div  class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-secondary"
               data-src="../images/assign-bg.jpg"
               data-sizes="(min-width: 650px) 650px, 100vw" uk-img>
-        <ul>
-          <h1> <%= @user.first_name%>'s assignment(s) </h1>
-        </ul>
-      </div>
- <div style="background-image: url(../images/post-bg.jpg)">
-
-
-
+      <ul>
+        <h1> <%= @user.first_name%>'s assignment(s) </h1>
+      </ul>
+    </div>
+    <div style="background-image: url(../images/post-bg.jpg)">
       <div class="uk-section uk-background-cover">
         <div class="uk-container  ">
           <div class="uk-panel uk-light uk-margin-medium" >
             <h1>
-            <a href="/assignments">  <span class="uk-margin-small-right" uk-icon="file-edit"></span>Back to Assignments</h1></a>
+              <a href="/assignments">  <span class="uk-margin-small-right" uk-icon="file-edit"></span>Back to Assignments</h1>
+            </a>
           </div>
           <div class="uk-grid-match uk-child-width-expand@m" uk-grid>
             <div >
@@ -34,34 +29,26 @@
               </div>
             </div>
             <div>
-            
               <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                 <% if @assignment.status == true %>
                   <div class="uk-card-badge uk-label" style="background-color:green;">Passed</div>
                   <p><%= @assignment.note %>
                     <h1>
                     <% else %>
-                    <form action="/edit_assignment/<%= @assignment.id %>" method="POST">
-                            <input type="hidden" id="hidden" name="_method" value="patch"/>
-                            <fieldset class="uk-fieldset">
-                         
-                            <div class="uk-margin">
-                             
-                                <textarea class="uk-textarea" rows="10" name="edit_note" id="edit_note"> <%= @assignment.note %></textarea>
-                            </div>
-                            </fieldset>
-                            <button class="uk-button-small uk-align-right bg" id="center_white" type="submit">Submit</button>
-                          </form>
-                      
-                      <% end %>
-                      </div>
-                    </div>
+                      <form action="/edit_assignment/<%= @assignment.id %>" method="POST">
+                        <input type="hidden" id="hidden" name="_method" value="patch"/>
+                        <fieldset class="uk-fieldset">
+                          <div class="uk-margin">
+                            <textarea class="uk-textarea" rows="10" name="edit_note" id="edit_note"> <%= @assignment.note %></textarea>
+                          </div>
+                        </fieldset>
+                        <button class="uk-button-small uk-align-right bg" id="center_white" type="submit">Submit</button>
+                      </form>
+                    <% end %>
                   </div>
                 </div>
               </div>
-            <% else %>
-              <a href="/signup">Sign Up</a>
-              <a href="/login"> Sign In </a>
-            <%end %>
-          </body>
-        </html>
+            </div>
+          </div>
+  </body>
+</html>

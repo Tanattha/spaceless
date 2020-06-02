@@ -3,9 +3,10 @@ class PostsController < ApplicationController
     get '/posts' do
         if logged_in?
             @user = current_user
+            @number_posts = Post.where(course_id: @user.course_id).size
             erb :'posts/post'
         else
-            redirect to '/login'
+            redirect to '/'
         end
     end
 
@@ -18,7 +19,7 @@ class PostsController < ApplicationController
             edit_post.save
             redirect to '/posts'
         else
-            redirect to '/login'
+            redirect to '/'
         end
     end
 
@@ -34,7 +35,7 @@ class PostsController < ApplicationController
                 redirect to '/posts'
             end
         else
-            redirect to '/login'
+            redirect to '/'
         end
     end
 
@@ -46,7 +47,7 @@ class PostsController < ApplicationController
             @delete_post.destroy
             redirect to '/posts'
         else
-            redirect to '/login'
+            redirect to '/'
         end
     end
     

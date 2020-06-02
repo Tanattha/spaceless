@@ -1,85 +1,110 @@
 <!DOCTYPE HTML>
 <html>
   <body>
-    <% if logged_in? %>
       <div  class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-secondary"
-              data-src="../images/assign-bg.jpg"
-              data-sizes="(min-width: 650px) 650px, 100vw" uk-img>
+            data-src="../images/assign-bg.jpg"
+            data-sizes="(min-width: 650px) 650px, 100vw" uk-img>
         <ul><br>
-          <h1> <%= @user.first_name%>'s assignment(s) </h1>
+          <h1> Assignment </h1>
         </ul>
       </div>
- <div style="background-image: url(../images/post-bg.jpg)">
- <br>
-        <div class="uk-container">
-        
+      <br>
+      <div style="background-image: url(../images/post-bg.jpg)">
+      <br>
+      <div class="uk-container">
 
-      <div class="uk-child-width-1-2 uk-text-left" uk-grid>
+        <div class="uk-child-width-1-2 uk-text-left" uk-grid>
         <div>
-          <div class="uk-child-width-1-2 uk-text-left" uk-grid>
+        <div class="uk-child-width-1-2 uk-text-left" uk-grid>
+          <div>
+          <div>
+<!----etc----->
             <div>
-           <div>
-                <div class=" uk-card uk-card-default uk-card-body"  style="background-color:#E35109;">
-                <div class="uk-card-badge uk-label" style="background-color:yellow;color:black">IMPORTANT</div>
-               
-              <ul class="white">
-              <br>
-                  <% @passed_assignment.each do |pass| %>
-                  <% if pass.assignment.name %>
-                    <li class="white-bg"><a href="/edit_assignment/<%= pass.assignment.id %>" class="uk-card-hover"><p> <%= pass.assignment.name %></p></a></li>
-                    <p id="small"> Last Updated : <%= pass.assignment.updated_at.strftime("%m/%Y/%d") %> </p>
-                <% else %>
-                    <li style="color:red"> You haven't passed any assignment yet.</li>
-               </ul>
-               
-              <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-            <div>
-                <div class="blue-bg uk-card uk-card-default uk-card-body">
-                <div class="uk-card-badge uk-label" style="background-color:green;">Passed</div>
-               
-              <ul class="white">
-              <br>
-                  <% @passed_assignment.each do |pass| %>
-                  <% if pass.assignment.name %>
-                    <li class="white-bg"><a href="/edit_assignment/<%= pass.assignment.id %>" class="uk-card-hover"><p> <%= pass.assignment.name %></p></a></li>
-                    <p id="small"> Last Updated : <%= pass.assignment.updated_at.strftime("%m/%Y/%d") %> </p>
-                <% else %>
-                    <li style="color:red"> You haven't passed any assignment yet.</li>
-               </ul>
-               
-              <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="bg uk-card uk-card-default uk-card-body uk-margin-small-bottom">
-        <div class="uk-card-badge uk-label">New</div>
+        
           
-          <ul class="white">
-          <br>
-            <% @on_process_assignment.each do |on_process| %>
-              <% if on_process.status == true %>
-              
-                <li class="white-bg"><a href="/edit_assignment/<%= on_process.id %>"  class="uk-card-hover" ><p> <%= on_process.name %></p></a></li>
-                <p> <%= on_process.detail %></p>
-                  <p id="small"> Last Updated : <%= on_process.updated_at.strftime("%m/%Y/%d %l:%M %p %Z") %> </p>
-                </li>
-              <% end %>
-            <% end %>
-          </div>
+    
+     <div class="uk-grid-small uk-flex-middle" style="color:white" uk-grid>
+                <div>
+                  <img class="uk-border-circle" width="40" height="40" src="https://getuikit.com/docs/images/avatar.jpg">
+                </div>
+                <ul>
+                  <div class="uk-width-1-1">
+                    <h5 id="center_white"  class="uk-margin-remove-bottom"><%= @user.first_name %></h5>
+                  </div>
+                </ul>
+
+                </div>
+                <div class="white"><br>
+                <p> Course : <%= @user.course.name %> </p>
+                <p> Email : <%= @user.email %> </p>
+                <p> Passed Assignment(s) : <%= @number_passed_assignments %> / 8 </p>
+                
+                <p> Passed Exam(s) : <%= @number_passed_exams %> / 4 </p>
+                
+                <br>
+              </div>
+            
+       
         </div>
       </div>
       </div>
+<!----etc----->
+<!---exam start-->
+         <div>
+        <div class="uk-card uk-card-default">
+          <div class="uk-card-badge uk-label" style="background-color:red;color:white">EXAMS</div>
+    
+          <% @exams.each do |each_exam| %> 
+          <% if each_exam.title %>
+          
+            <div class="uk-card-header bg white"  >
+             <br>
+              <div class="uk-grid-small uk-flex-middle" uk-grid>
+              <div class="uk-width-1-1">
+              
+                <p><a href="/submit_exam/<%= each_exam.id %>"  class=" white" ><p> <%= each_exam.title %></p></a></p>
+                <p id="small"> Last Updated : <%= each_exam.updated_at.strftime("%m/%Y/%d") %> </p>
+              </div>
+              </div>
+            </div>
+                <hr>
+            <% end %>
+            <% end %>
+            
+        </div>
+        </div>
       </div>
-    <% else %>
-      <a href="/signup">Sign Up</a>
-      <a href="/login"> Sign In </a>
-    <%end %>
-  </body>
-</html>
+      </div>
+<!---exam end--->
+<!---open start---->
+                <div>
+                  <div class="uk-card uk-card-default uk-panel-scrollable" uk-height-viewport="min-height: 200" >
+                    <div class="uk-card-badge uk-label ">OPEN</div>
+                    <% @course_assignments.each do |on_process| %>
+                      <% if on_process.status == true %>
+                        <div class="uk-card-header bg white"  >
+                          <div class="uk-grid-small uk-flex-middle" uk-grid>
+                            <div class="uk-width-1-1">
+                              <p ><a href="/edit_assignment/<%= on_process.id %>"  class=" white" >
+                              <uL>
+                                  <li> <%= on_process.name %></li>
+                                  </ul>
+                                </a></p>
+                              <p id="small"> Last Updated : <%= on_process.updated_at.strftime("%m/%Y/%d %l:%M %p %Z") %> </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="uk-card-body" >
+                          <p> <%= on_process.detail %></p>
+                        </div>
+                      <% end %>
+                      <hr>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+<!---open end---->
+            </div>
+          
+        </body>
+      </html>

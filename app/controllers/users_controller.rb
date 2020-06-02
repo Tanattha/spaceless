@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   get "/signup" do
     if logged_in?
-      redirect to '/login'
+      redirect to '/account'
     else
       erb :index
     end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     if logged_in?
       redirect to '/account'
     else
-      erb :'users/login'
+      redirect to '/'
     end
   end
 
@@ -35,7 +35,11 @@ class UsersController < ApplicationController
     user = User.find_by(username:  params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect '/account'
+      if user.role_id == 1
+        redirect '/admin'
+      else
+        redirect '/account'
+      end
     else
       flash[:message] = "Invalid username or password."
       redirect '/login'
@@ -47,7 +51,7 @@ class UsersController < ApplicationController
       @user = current_user
       erb :'users/account'
     else
-      redirect to '/login'
+      redirect to '/'
     end
   end
 
@@ -77,12 +81,6 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/admin' do
-    if logged_in?
-      erb :'admin/admin'
-    else
-      redirect to '/login'
-    end
-  end
+ 
 
 end

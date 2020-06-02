@@ -1,11 +1,19 @@
-<form method="post" action="/approved">
-<% @show_all.each do |student| %>
-<% if student.assignment_status == false %>
-<%= student.first_name %> <%= student.last_name %><br>
-<%= student.course_id %><br>
-<%= student.assignment %><br>
-content..<br>
-<input type="submit" value="approved"><br><br>
-<% end %>
-<% end %>
+<% @all_assignment.each do |assignment| %>
+Assignment ID :<%= assignment.assignment_id %>
+Uer ID :<%= assignment.user_id %>
+Course ID :<%= assignment.course_id %>
+Status : <%= assignment.status %>
+<%=assignment.note %>
+
+
+
+<form action="/approved_assignment/<%= assignment.assignment_id %>" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="patch"/>
+    <fieldset class="uk-fieldset">
+    <div class="uk-margin">
+    <textarea class="uk-textarea" rows="10" name="edit_note" id="edit_note"> <%= @assignment.note %></textarea>
+    </div>
+    </fieldset>
+    <button class="uk-button-small uk-align-right bg" id="center_white" type="submit">Approved</button>
 </form>
+<% end %>

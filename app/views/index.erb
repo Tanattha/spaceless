@@ -16,53 +16,54 @@
               <img src="../images/slide1.jpg" alt="" uk-cover>
               <div class="uk-position-center uk-position-small uk-text-center uk-light">
                 <h3 class="uk-margin-remove">WELCOME TO SPACELESS</h3>
-                <h3 class="uk-margin-remove">Not a member? </h3>
-                <br>
-                <a class="uk-button uk-button-default" href="#modal-signup" uk-toggle>SIGN UP</a>
+<!--sign up start-->                
+                <% if !logged_in? %>
+                  <h3 class="uk-margin-remove">Not a member yet? </h3>
+                  <br>
                 
-  <!--sign up start--->                
-          <div id="modal-signup" uk-modal>
-          <div class="uk-modal-dialog">
+                  <a class="uk-button uk-button-default" href="#modal-signup" uk-toggle>SIGN UP</a>
+                
+               
+                  <div id="modal-signup" uk-modal>
+                  <div class="uk-modal-dialog">
             
-          <div class="uk-modal-header bg">         
-            <h4 class="white"><span class="uk-margin-small" uk-icon="plus"></span> SIGN UP</h4></a>
-          </div>
+                  <div class="uk-modal-header bg">         
+                    <h4 class="white"><span class="uk-margin-small" uk-icon="plus"></span> SIGN UP</h4></a>
+                  </div>
 
-          <div class="uk-modal-body ">
+                  <div class="uk-modal-body ">
 
-            <form action="/signup" method="POST">
-              <fieldset class="uk-fieldset">
-              <div class="uk-margin">
-                <input class="uk-input" type="text" name="first_name" id="first_name"  placeholder="Firstname:">
-              </div>
-              <div class="uk-margin">
-                <input class="uk-input" type="text" name="last_name" id="last_name"  placeholder="Lastname">
-              </div>
-              <div class="uk-margin">
-                <input class="uk-input" type="text" name="email" id="email" placeholder="Email:">
-              </div>
-              <div class="uk-margin">
-                <input class="uk-input" type="text" name="username" id="usernmae"  placeholder="Username:">
-              </div>
-              <div class="uk-margin">
-                <input class="uk-input" type="password" name="password" id="password" placeholder="Password:">
-              </div>
-              </fieldset>
+                    <form action="/signup" method="POST">
+                      <fieldset class="uk-fieldset">
+                      <div class="uk-margin">
+                        <input class="uk-input" type="text" name="first_name" id="first_name"  placeholder="Firstname:">
+                      </div>
+                      <div class="uk-margin">
+                        <input class="uk-input" type="text" name="last_name" id="last_name"  placeholder="Lastname">
+                      </div>
+                      <div class="uk-margin">
+                        <input class="uk-input" type="text" name="email" id="email" placeholder="Email:">
+                      </div>
+                      <div class="uk-margin">
+                        <input class="uk-input" type="text" name="username" id="usernmae"  placeholder="Username:">
+                      </div>
+                      <div class="uk-margin">
+                        <input class="uk-input" type="password" name="password" id="password" placeholder="Password:">
+                      </div>
+                      </fieldset>
           
-              <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-                <button class="uk-button uk-button-primary" type="submit">Submit</button>
-              </div>
-            </form>
+                      <div class="uk-modal-footer uk-text-right">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                        <button class="uk-button uk-button-primary" type="submit">Submit</button>
+                      </div>
+                    </form>
 
-          </div>
+                  </div>
 
-          </div>         
-          </div>    
-          
-          
-          
-  <!--sign up end---> 
+                  </div>         
+                  </div>    
+                <% end %>
+<!--sign up end---> 
             </li>
             <li>
               <img src="../images/slide2.jpg" alt="" uk-cover>

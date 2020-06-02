@@ -44,7 +44,7 @@
     .blue-bg {
       background-color: #42B6E1;
     }
-    blue {
+    .blue {
       color: #42B6E1;
     }
   </style>
@@ -56,15 +56,18 @@
       <div class="uk-navbar-left">
         <ul class="uk-navbar-nav">
           <li class="uk-active"><a href="/"><img  width="70" height="70" src="../images/logo.png" ></a></li>
+          <% if logged_in? %>
           <li class="uk-active"><a href="/account">Profile</a></li>
           <li class="uk-active"><a href="/assignments">Assignment</a></li>
           <li class="uk-active"><a href="/posts">Board</a></li>
           <li class="uk-active"><a href="/group">Contact</a></li>
+          <% end %>
         </ul>
       </div>
       <div class="uk-navbar-right">
         <ul class="uk-navbar-nav">
-          <li class="uk-active"><a href="https://www.facebook.com/spacelesstutoring" uk-icon="icon: facebook"></a></li>
+        
+          <li class="uk-active"><a onClick="window.open('https://www.facebook.com/spacelesstutoring');" uk-icon="icon: facebook"></a></li>
           <li class="uk-active"><a href="mailto:spaceless.tutoring@gmail.com" uk-icon="icon: mail"></a></li>
          
           <% if logged_in? %>
@@ -110,7 +113,7 @@
       </div>
     </div>
     <% if flash.has?(:message) %>
-      <p style="color:red;"><%= flash[:message] %> </p>
+      <p style="color:red;text-align: center;"><%= flash[:message] %> </p>
     <% end %>
   </div>
   <%= yield %>

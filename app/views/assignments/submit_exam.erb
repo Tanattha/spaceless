@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+  <body>
+    <br>
+    <div  class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-secondary"
+              data-src="../images/assign-bg.jpg"
+              data-sizes="(min-width: 650px) 650px, 100vw" uk-img>
+      <ul>
+        <h1> <%= @user.first_name%>'s assignment(s) </h1>
+      </ul>
+    </div>
+    <div style="background-image: url(../images/post-bg.jpg)">
+      <div class="uk-section uk-background-cover">
+        <div class="uk-container  ">
+          <div class="uk-panel uk-light uk-margin-medium" >
+            <h1>
+              <a href="/assignments">  <span class="uk-margin-small-right" uk-icon="file-edit"></span>Back to Assignments</h1>
+            </a>
+          </div>
+          <div class="uk-grid-match uk-child-width-expand@m" uk-grid>
+            <div >
+              <div class="uk-card uk-card-body bg" style="font-color: black">
+                <ul style="color:white">
+                  <li >Title : <%= @user_exam.exam.title %> </li>
+                  <p id="small">Created on : <%= @user_exam.created_at.strftime("%m/%Y/%d %l:%M %p %Z") %> </p>
+                  <p id="small">Last Updated : <%= @user_exam.updated_at.strftime("%m/%Y/%d %l:%M %p %Z") %></p>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                <br>
+                <% if @user_exam.point >= 65 %>
+                  <div class="uk-card-badge uk-label" style="background-color:green;">Passed</div>
+                  <h4 class="uk-text-center" style="color:green">You score is : <%= @user_exam.point %> / 100</h4>
+                <% elsif  @user_exam.point == 0 %>
+                  <div class="uk-card-badge uk-label" style="background-color:yellow;color:black">on process</div>
+                  <br>
+                  <p class="uk-text-center"><a class="uk-button uk-button-primary" href="#modal-overflow" uk-toggle>Take an exam here!</a></p>
+                  <div id="modal-overflow" uk-modal>
+                    <div class="uk-modal-dialog">
+                      <button class="uk-modal-close-default" type="button" uk-close></button>
+                      <div class="uk-modal-header bg white">
+                        <h4 class="uk-modal-title white"><%= @user_exam.exam.title %> </h4>
+                        Click on the letter choices to determine if you have the correct answer and for question explanations
+                      </div>
+                      <div class="uk-modal-body" uk-overflow-auto>
+                        The point of view from which the passage is told can best be described as that of:
+                        <li>A. man looking back on the best years of his life as director of a community center in a strife-ridden neighborhood.</li>
+                        <li>B. a narrator describing his experiences as they happen, starting with childhood and continuing through his adult years as an advocate for troubled children.</li>
+                        <li>C. an unidentified narrator describing a man who devoted his life to neighborhood children years after his own difficult childhood.</li>
+                        <li>D. an admiring relative of a man whose generosity with children was widely respected in the neighborhood where he turned around a declining community center.</li>
+                        <p>This's an example of exams </p>
+                        <p>Click Submit to random a score for you! </p>
+                      </ul>
+                    </div>
+                    <form method="POST" action="/exam_random/<%= @user_exam.id %>">
+                      <div class="uk-modal-footer uk-text-right">
+                        <input type="hidden" name="_method" id="hidden" value="patch"/>
+                        <button class="uk-button uk-button-primary"  type="submit">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                <% else %>
+                  <br>
+                  <div class="uk-card-badge uk-label" style="background-color:red;">Failed</div>
+                  <h4 class="uk-text-center" style="color:red">You score is : <%= @user_exam.point %> / 100</h4>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>
