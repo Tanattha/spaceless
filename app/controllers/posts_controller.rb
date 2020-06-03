@@ -17,6 +17,7 @@ class PostsController < ApplicationController
             edit_post.user_id == @user.id
             edit_post.update(title: params[:edit_title], content: params[:edit_content])
             edit_post.save
+            flash[:message] = "Submitted Successfully"
             redirect to '/posts'
         else
             redirect to '/'
@@ -31,7 +32,7 @@ class PostsController < ApplicationController
                 redirect to '/posts'
             else
                 new_post = Post.create(:title => params[:new_title], :content => params[:new_content], :user_id => @user.id, :course_id => @user.course_id)
-                #binding.pry
+                flash[:message] = "Submitted Successfully"
                 redirect to '/posts'
             end
         else
@@ -45,6 +46,7 @@ class PostsController < ApplicationController
             @delete_post = Post.find_by_id(params[:id]) 
             @delete_post.user_id == @user.id
             @delete_post.destroy
+            flash[:message] = "Deleted Successfully"
             redirect to '/posts'
         else
             redirect to '/'

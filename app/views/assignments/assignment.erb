@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
   <body>
+
       <div  class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-secondary"
             data-src="../images/assign-bg.jpg"
             data-sizes="(min-width: 650px) 650px, 100vw" uk-img>
@@ -11,100 +12,98 @@
       <br>
       <div style="background-image: url(../images/post-bg.jpg)">
       <br>
+      <div>
+      <div>
       <div class="uk-container">
-
         <div class="uk-child-width-1-2 uk-text-left" uk-grid>
         <div>
         <div class="uk-child-width-1-2 uk-text-left" uk-grid>
+        <div>
+        <div>
+<!----profile----->
           <div>
+          <div class="uk-grid-small uk-flex-middle" style="color:white" uk-grid>
           <div>
-<!----etc----->
-            <div>
-        
-          
-    
-     <div class="uk-grid-small uk-flex-middle" style="color:white" uk-grid>
-                <div>
-                  <img class="uk-border-circle" width="40" height="40" src="https://getuikit.com/docs/images/avatar.jpg">
-                </div>
-                <ul>
-                  <div class="uk-width-1-1">
-                    <h5 id="center_white"  class="uk-margin-remove-bottom"><%= @user.first_name %></h5>
-                  </div>
-                </ul>
+            <img class="uk-border-circle" width="40" height="40" src="<%=@user.avatar%>" >
+          </div>
+            <ul>
+              <div class="uk-width-1-1">
+                <h5 id="center_white"  class="uk-margin-remove-bottom"><%= @user.first_name %></h5>
+              </div>
+            </ul>
 
-                </div>
-                <div class="white"><br>
+              </div>
+              <div class="white"><br>
                 <p> Course : <%= @user.course.name %> </p>
                 <p> Email : <%= @user.email %> </p>
                 <p> Passed Assignment(s) : <%= @number_passed_assignments %> / 8 </p>
-                
                 <p> Passed Exam(s) : <%= @number_passed_exams %> / 4 </p>
-                
                 <br>
               </div>
-            
-       
-        </div>
-      </div>
-      </div>
-<!----etc----->
-<!---exam start-->
-         <div>
-        <div class="uk-card uk-card-default">
-          <div class="uk-card-badge uk-label" style="background-color:red;color:white">EXAMS</div>
-    
+          </div>
+          </div>
+          </div>
+<!----profile----->
+<!---exam start--->
+        <div class="uk-container">
+        <div class="uk-card uk-card-default uk-panel-scrollable" uk-height-viewport="min-height: 100" >
+        <div class="uk-card-badge uk-label" style="background-color:red;color:white">EXAMS</div>
           <% @exams.each do |each_exam| %> 
-          <% if each_exam.title %>
-          
-            <div class="uk-card-header bg white"  >
-             <br>
+            <% if each_exam.title %>
+              <div class="uk-card-header bg white"  >
+              <br>
               <div class="uk-grid-small uk-flex-middle" uk-grid>
               <div class="uk-width-1-1">
-              
                 <p><a href="/submit_exam/<%= each_exam.id %>"  class=" white" ><p> <%= each_exam.title %></p></a></p>
                 <p id="small"> Last Updated : <%= each_exam.updated_at.strftime("%m/%Y/%d") %> </p>
               </div>
               </div>
-            </div>
-                <hr>
+              </div>
+              <hr>
             <% end %>
-            <% end %>
-            
+          <% end %>  
         </div>
         </div>
-      </div>
-      </div>
+        </div>
+        </div>
+       
+       
+        
 <!---exam end--->
 <!---open start---->
-                <div>
-                  <div class="uk-card uk-card-default uk-panel-scrollable" uk-height-viewport="min-height: 200" >
-                    <div class="uk-card-badge uk-label ">OPEN</div>
-                    <% @course_assignments.each do |on_process| %>
-                      <% if on_process.status == true %>
-                        <div class="uk-card-header bg white"  >
-                          <div class="uk-grid-small uk-flex-middle" uk-grid>
-                            <div class="uk-width-1-1">
-                              <p ><a href="/edit_assignment/<%= on_process.id %>"  class=" white" >
-                              <uL>
-                                  <li> <%= on_process.name %></li>
-                                  </ul>
-                                </a></p>
-                              <p id="small"> Last Updated : <%= on_process.updated_at.strftime("%m/%Y/%d %l:%M %p %Z") %> </p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="uk-card-body" >
-                          <p> <%= on_process.detail %></p>
-                        </div>
-                      <% end %>
-                      <hr>
-                    <% end %>
-                  </div>
+        <div>
+        <div class="uk-card uk-card-default uk-panel-scrollable" uk-height-viewport="min-height: 200" >
+        <div class="uk-card-badge uk-label " >NEW</div>
+            <% @course_assignments.each do |on_process| %>
+              <% if on_process.status == true %>
+                
+                <div class="uk-card-header bg white"  >
+                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div class="uk-width-1-1">
+                  <p ><a href="/edit_assignment/<%= on_process.id %>"  class=" white" >
+                    <ul>
+                      <li> <%= on_process.name %></li>
+                    </ul>
+                   </a></p>
+                  <p id="small"> Last Updated : <%= on_process.updated_at.strftime("%m/%Y/%d %l:%M %p %Z") %> </p>
                 </div>
-              </div>
+                </div>
+                </div>
+                <div class="uk-card-body" >
+                  <p> <%= on_process.detail %></p>
+                </div>
+              <% end %>
+              <hr>
+            <% end %>
+        </div>
+        </div>
+        </div>
+        </div>
+        
 <!---open end---->
-            </div>
-          
-        </body>
-      </html>
+      
+      </div>
+      </div>
+      </div>
+  </body>
+</html>

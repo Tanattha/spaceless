@@ -7,3 +7,4 @@ use PostsController
 use AdminController
 run ApplicationController
 
+

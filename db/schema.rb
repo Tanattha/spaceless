@@ -45,17 +45,9 @@ ActiveRecord::Schema.define(version: 20200602144747) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "schools", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "course_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "user_assignments", force: :cascade do |t|
     t.integer "assignment_id"
     t.integer "user_id"
-    t.integer "course_id"
     t.boolean "status", default: false
     t.string "note"
     t.datetime "created_at", null: false
@@ -65,7 +57,6 @@ ActiveRecord::Schema.define(version: 20200602144747) do
   create_table "user_exams", force: :cascade do |t|
     t.integer "exam_id"
     t.integer "user_id"
-    t.integer "course_id"
     t.boolean "status", default: false
     t.integer "point", default: 0
     t.datetime "created_at", null: false
@@ -78,6 +69,7 @@ ActiveRecord::Schema.define(version: 20200602144747) do
     t.string "email"
     t.string "username"
     t.string "password_digest"
+    t.string "avatar"
     t.integer "role_id", default: 0
     t.integer "course_id", default: 0
     t.datetime "created_at", null: false

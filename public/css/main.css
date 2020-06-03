@@ -1,9 +1,39 @@
-.uk-add-business {
-    background: url('https://www.carbonbrief.org/wp-content/uploads/2018/10/ocean-sunrays.jpg') no-repeat bottom center;
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+h1 {
+  font-family: Tahoma;
+  font-size: 23px;
+}
+p {
+  font-family: Tahoma;
+  font-size: 15px;
+}
+#small {
+    font-size: 10px;
   }
-  .uk-button-default:hover, .uk-button-default:focus {
-    border-color: transparent;
-  }
-  .uk-button-default {
-    border: transparent;
-  }
+#center_white {
+  text-align: center;
+  color: white;
+}
+#center {
+  text-align: center;
+}
+.bg {
+  background-color: #42B6E1;
+}
+.white-bg{
+  background-color:white;"
+}
+.white{
+  color: white;
+}
+.blue-bg {
+  background-color: #42B6E1;
+}
+.blue {
+  color: #42B6E1;
+}

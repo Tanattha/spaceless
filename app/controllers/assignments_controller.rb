@@ -4,7 +4,7 @@ class AssignmentsController < ApplicationController
         if logged_in?
             @user = current_user
             @course_assignments = @user.course.assignments.where(status: true).order(id: :desc)
-            @exams = @user.course.exams.where(status: true)
+            @exams = @user.course.exams.where(status: true).order(id: :desc)
             @number_passed_assignments =  @user.user_assignments.where(status: true).size
             @number_passed_exams = @user.user_exams.where("point > ?", 65).size
             erb :'assignments/assignment'
@@ -17,7 +17,7 @@ class AssignmentsController < ApplicationController
     get '/submit_exam/:id' do
         if logged_in?
             @user = current_user          
-            @user_exam = UserExam.find_or_create_by(exam_id: params[:id], user_id: @user.id, course_id: @user.course_id)
+            @user_exam = UserExam.find_or_create_by(exam_id: params[:id], user_id: @user.id)
             erb :'assignments/submit_exam'
         else
             redirect to '/'
@@ -31,6 +31,7 @@ class AssignmentsController < ApplicationController
           random_point = Random.rand(1...100)
           user_update.update(point: random_point)
           user_update.save 
+          flash[:message] = "Submitted Successfully"
           redirect to '/assignments'
         else
           redirect to '/assignments'
@@ -41,7 +42,7 @@ class AssignmentsController < ApplicationController
     get '/edit_assignment/:id' do
         if logged_in?
             @user = current_user
-            @assignment = UserAssignment.find_or_create_by(assignment_id: params[:id], user_id: @user.id, course_id: @user.course_id)
+            @assignment = UserAssignment.find_or_create_by(assignment_id: params[:id], user_id: @user.id)
             erb :'assignments/start_edit_assignment'
         else
             redirect to '/'
@@ -62,15 +63,6 @@ class AssignmentsController < ApplicationController
             redirect to '/'
       end
     end
-
-    post '/update_assignment/:id' do
-        if logged_in?
-            redirect to '/assignments'
-        else
-            redirect to '/'
-        end
-    end
-
 
 
 end

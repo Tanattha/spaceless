@@ -1,19 +1,39 @@
-<% @all_assignment.each do |assignment| %>
-Assignment ID :<%= assignment.assignment_id %>
-Uer ID :<%= assignment.user_id %>
-Course ID :<%= assignment.course_id %>
-Status : <%= assignment.status %>
-<%=assignment.note %>
+<!DOCTYPE HTML>
+<html>
+  <body>
+    <div style="background-image: url(../images/post-bg.jpg)">
+    <div>
+       <div class="uk-container">
+        <div class="uk-card uk-card-default">
+        
+        <% @all_assignment.each do |assignment| %>
+        <% if assignment.status == false %>
+        
+          <div class="uk-card-header bg white">
+            <div class="uk-grid-small uk-flex-middle" uk-grid>
+              <div>
+                <p>Assignment ID : <%= assignment.assignment_id %></p>
+                <p>Uer ID : <%= assignment.user_id %></p>
+                <p>Updated at : <%= assignment.updated_at.strftime("%m/%Y/%d") %></p>
+              </div>
+            </div>
+          </div>
+          <div class="uk-card-body">
+            <p><%=assignment.note %></p>
+          </div>
 
-
-
-<form action="/approved_assignment/<%= assignment.assignment_id %>" method="POST">
-    <input type="hidden" id="hidden" name="_method" value="patch"/>
-    <fieldset class="uk-fieldset">
-    <div class="uk-margin">
-    <textarea class="uk-textarea" rows="10" name="edit_note" id="edit_note"> <%= @assignment.note %></textarea>
-    </div>
-    </fieldset>
-    <button class="uk-button-small uk-align-right bg" id="center_white" type="submit">Approved</button>
-</form>
-<% end %>
+          <div class="uk-card-footer">
+            <form action="/approved_assignment/<%= assignment.assignment_id %>" method="POST">
+              <input type="hidden" id="hidden" name="_method" value="patch"/>
+              <button class="uk-button-small uk-button-primary uk-align-right "  type="submit">Approved</button>
+            </form>
+          </div>
+          <hr class="uk-divider-icon">
+        <% end %>
+        <% end %>
+       </div>
+        </div>
+      </div>
+      </div>
+  </body>
+</html>

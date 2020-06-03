@@ -16,6 +16,14 @@ class UsersController < ApplicationController
       @user = User.create(:first_name => params[:first_name], :last_name => params[:last_name], :username => params[:username], :email => params[:email], :password => params[:password])  
         if @user.save
           session[:user_id] = @user.id
+          if @user.avatar
+            @user.avatar
+          else
+            random = Random.rand(1...5)
+            @user.update(avatar: "../images/avatars/#{random}.jpg")
+            @user.save
+          end
+          flash[:message] = "Created an account Successfully"
           redirect to '/account'
         else
           erb :'users/signup'
@@ -32,16 +40,19 @@ class UsersController < ApplicationController
   end
 
   post "/login" do
-    user = User.find_by(username:  params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      if user.role_id == 1
+    @user = User.find_by(username:  params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      if @user.role_id == 1
+        flash[:message] = "logged in Successfully"
         redirect '/admin'
       else
+        flash[:message] = "logged in Successfully"
         redirect '/account'
       end
+
     else
-      flash[:message] = "Invalid username or password."
+      flash[:message] = "Invalid username or password. Please Try again."
       redirect '/login'
     end
   end
@@ -73,14 +84,13 @@ class UsersController < ApplicationController
     if @user.course_id.to_i == 0
       random_course = Random.rand(1...4)
       @user.update(course_id: random_course)
-      @user.save 
+      @user.save
+      flash[:message] = "Submitted Successfully"
       redirect to '/account'
     else
       redirect to '/account'
       flash[:message] = "You already assigned course."
     end
   end
-
- 
 
 end

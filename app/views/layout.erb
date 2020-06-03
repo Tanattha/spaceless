@@ -1,62 +1,21 @@
 <!DOCTYPE HTML>
-<head>
-  <title>SPACELESS</title>
-  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
-  <!-- UIkit CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/css/uikit.min.css" />
-  <!-- UIkit JS -->
-  <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/js/uikit.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/js/uikit-icons.min.js"></script>
-  <style>
-    .footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-    }
-    h1 {
-      font-family: Tahoma;
-      font-size: 23px;
-    }
-    p {
-      font-family: Tahoma;
-      font-size: 15px;
-    }
-    #small {
-        font-size: 10px;
-      }
-    #center_white {
-      text-align: center;
-      color: white;
-    }
-    #center {
-      text-align: center;
-    }
-    .bg {
-      background-color: #42B6E1;
-    }
-    .white-bg{
-      background-color:white;"
-    }
-    .white{
-      color: white;
-    }
-    .blue-bg {
-      background-color: #42B6E1;
-    }
-    .blue {
-      color: #42B6E1;
-    }
-  </style>
-</head>
-<html>
-  <body>
-  
-    <nav class="uk-navbar-container" uk-navbar style="background-color: #48BFEB">
+  <head>
+    <title>SPACELESS</title>
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="../css/uikit.min.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <!-- UIkit JS -->
+    <script src="../js/uikit.min.js"></script>
+    <script src="../js/uikit-icons.min.js"></script>
+  </head>
+
+    <body>
+      <nav class="uk-navbar-container" uk-navbar style="background-color: #48BFEB">
       <div class="uk-navbar-left">
         <ul class="uk-navbar-nav">
           <li class="uk-active"><a href="/"><img  width="70" height="70" src="../images/logo.png" ></a></li>
-          <% if logged_in? %>
+          <% if logged_in? && @user.course_id > 0 %>
           <li class="uk-active"><a href="/account">Profile</a></li>
           <li class="uk-active"><a href="/assignments">Assignment</a></li>
           <li class="uk-active"><a href="/posts">Board</a></li>
@@ -66,10 +25,8 @@
       </div>
       <div class="uk-navbar-right">
         <ul class="uk-navbar-nav">
-        
           <li class="uk-active"><a onClick="window.open('https://www.facebook.com/spacelesstutoring');" uk-icon="icon: facebook"></a></li>
           <li class="uk-active"><a href="mailto:spaceless.tutoring@gmail.com" uk-icon="icon: mail"></a></li>
-         
           <% if logged_in? %>
             <li class="uk-active"><a href="/logout" uk-icon="icon: sign-out"></a></li>
           <% else %>
@@ -77,13 +34,10 @@
 <!--log in start--->                
           <div id="modal-login" uk-modal>
           <div class="uk-modal-dialog">
-
           <div class="uk-modal-header bg">
            <h4 class="white"><span class="uk-margin-small" uk-icon="sign-in"></span> LOG IN</h4></a>
           </div>
-          
           <div class="uk-modal-body ">
-
             <form action="/login" method="POST">
               <fieldset class="uk-fieldset">
               <div class="uk-margin">
@@ -93,7 +47,6 @@
                 <input class="uk-input" type="text" name="password" id="password" placeholder="Password:">
               </div>
               </fieldset>
-          
           <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
             <button class="uk-button uk-button-primary" type="submit">Submit</button>
@@ -106,16 +59,16 @@
           <% end %>
         </ul>
       </div>
-    </nav>
-    <div class="footer">
+      </nav>
+      <div class="footer">
       <div class="uk-section-secondary uk-light"  style="height: 20px">
         <p class="uk-icon="icon: facebook">Created by : Tanattha Thuenim <a href="https://github.com/Tanattha" uk-icon="icon: github"></a></p>
       </div>
-    </div>
-    <% if flash.has?(:message) %>
-      <p style="color:red;text-align: center;"><%= flash[:message] %> </p>
-    <% end %>
-  </div>
-  <%= yield %>
-</body>
+      </div>
+        <% if flash.has?(:message) %>
+          <p style="color:red;text-align: center;"><%= flash[:message] %> </p>
+        <% end %>
+      </div>
+    <%= yield %>
+  </body>
 </html>
