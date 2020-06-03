@@ -12,7 +12,7 @@ Click here for video walkthrough:
 
 ## Installation
 
-Fork and clone repo
+Fork and clone repo and run
 ```bash
 $ bundle install
 $ shotgun
