@@ -1,6 +1,6 @@
 # SPACELESS
 
-SPACLESS is a mock up online tutoring application built with Sinatra web framework that allows users to sign up, log in, log out and a fully functional CRUD (C-create, R-read, U-update, D-delete).
+SPACELESS is a mock up online tutoring application built with Sinatra web framework that allows users to sign up, log in, log out and a fully functional CRUD (C-create, R-read, U-update, D-delete).
 
 ## Video Walkthrough
 

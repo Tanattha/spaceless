@@ -57,15 +57,6 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/account' do
-    if logged_in?
-      @user = current_user
-      erb :'users/account'
-    else
-      redirect to '/'
-    end
-  end
-
   get '/logout' do
     if logged_in?
       session.destroy
@@ -76,6 +67,15 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/account' do
+    if logged_in?
+      @user = current_user
+      erb :'users/account'
+    else
+      redirect to '/'
+    end
+  end
+  
   get "/group" do
     @user = current_user
     @user_group = User.where(course_id: @user.course_id)
