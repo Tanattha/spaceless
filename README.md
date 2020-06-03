@@ -12,9 +12,9 @@ Fork and clone repo and run
 ```bash
 $ bundle install
 
-$ db:migrate
+$ rake db:migrate
 
-$ db:seed
+$ rake db:seed
 ```
 
 ## View
