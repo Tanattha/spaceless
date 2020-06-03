@@ -25,3 +25,6 @@ $ shotgun
 
 $ localhost:9393
 ```
+## License
+
+The application is available as open source under the terms of the MIT License.
