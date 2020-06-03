@@ -1,20 +1,26 @@
-#SPACELESS
+# SPACELESS
 
-SPACLESS is a online tutoring application built with Sinatra's framework.
+Spaceless is a online tutoring application built with Sinatra's framework.
 
-##Overview
+## Overview
 
 SPACLESS is a mock up online tutoring application that allows users to sign up, log in, log out and a fully functional CRUD. C-create, R-read, U-update, D-delete. 
 
-##Video Walkthrough
+## Video Walkthrough
 
 Click here for video walkthrough: 
 
-##Installation
+## Installation
 
 Fork and clone repo
+```bash
 $ bundle install
 $ shotgun
+```
 
-##run localhost on browser to view SPACELESS
+## view
+
+run localhost on browser 
+```bash
 $  localhost:9393
+```
