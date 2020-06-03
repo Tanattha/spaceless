@@ -11,7 +11,9 @@ Click here for video walkthrough:
 Fork and clone repo and run
 ```bash
 $ bundle install
+
 $ db:migrate
+
 $ db:seed
 ```
 
@@ -20,6 +22,6 @@ $ db:seed
 run shotgun in your terminal and type your localhost on browser 
 ```bash
 $ shotgun
-$  localhost:9393
-```
 
+$ localhost:9393
+```
