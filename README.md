@@ -18,7 +18,7 @@ $ bundle install
 $ shotgun
 ```
 
-## view
+## View
 
 run localhost on browser 
 ```bash
