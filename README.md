@@ -1,6 +1,6 @@
 # SPACELESS
 
-SPACLESS is a mock up online tutoring application built with Sinatra's framework that allows users to sign up, log in, log out and a fully functional CRUD. C-create, R-read, U-update, D-delete. 
+SPACLESS is a mock up online tutoring application built with Sinatra's framework that allows users to sign up, log in, log out and a fully functional CRUD (C-create, R-read, U-update, D-delete).
 
 ## Video Walkthrough
 
@@ -13,12 +13,13 @@ Fork and clone repo and run
 $ bundle install
 $ db:migrate
 $ db:seed
-$ shotgun
 ```
 
 ## View
 
-run localhost on browser 
+run shotgun in your terminal and type your localhost on browser 
 ```bash
+$ shotgun
 $  localhost:9393
 ```
+
