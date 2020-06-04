@@ -1,11 +1,14 @@
 class AdminController < ApplicationController
 
   get '/admin' do
-    @user = current_user
-    @all_assignment = UserAssignment.where(status:  0)
-    erb :'admin/admin'
+    if logged_in?
+      @user = current_user
+      @all_assignment = UserAssignment.where(status:  0)
+      erb :'admin/admin'
+    else
+      redirect to '/'
+    end
   end
-
   
   get '/approved_assignment/:id' do
     if logged_in?

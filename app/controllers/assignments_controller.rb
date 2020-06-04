@@ -27,16 +27,16 @@ class AssignmentsController < ApplicationController
     patch '/exam_random/:id' do
         @user = current_user
         user_update = UserExam.find_by_id(params[:id])
-        if user_update.point.to_i == 0
-          random_point = Random.rand(1...100)
-          user_update.update(point: random_point)
-          user_update.save 
-          flash[:message] = "Submitted Successfully"
-          redirect to '/assignments'
-        else
-          redirect to '/assignments'
-          flash[:message] = "You already passed this exam."
-        end
+            if user_update.point.to_i == 0
+                random_point = Random.rand(1...100)
+                user_update.update(point: random_point)
+                user_update.save 
+                flash[:message] = "Submitted Successfully"
+                redirect to '/assignments'
+            else
+                redirect to '/assignments'
+                flash[:message] = "You already passed this exam."
+            end
       end
 
     get '/edit_assignment/:id' do
@@ -51,17 +51,12 @@ class AssignmentsController < ApplicationController
 
     
     patch '/edit_assignment/:id' do
-      
-        if logged_in?
-            @user = current_user
-            update_assignment = UserAssignment.find_by_id(params[:id])
-            update_assignment.update(note: params[:edit_note])
-            update_assignment.save
-            flash[:message] = "Saved Successfully"
-            redirect to '/assignments' 
-        else
-            redirect to '/'
-      end
+        @user = current_user
+        update_assignment = UserAssignment.find_by_id(params[:id])
+        update_assignment.update(note: params[:edit_note])
+        update_assignment.save
+        flash[:message] = "Saved Successfully"
+        redirect to '/assignments' 
     end
 
 

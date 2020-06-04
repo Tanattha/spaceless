@@ -77,24 +77,27 @@ class UsersController < ApplicationController
   end
   
   get "/group" do
-    @user = current_user
-    @user_group = User.where(course_id: @user.course_id)
-    erb :'group/group'
+    if logged_in?
+      @user = current_user
+      @user_group = User.where(course_id: @user.course_id)
+      erb :'group/group'
+    else
+      redirect to '/'
+    end
   end
 
   patch '/random/:id' do
-    @user = current_user
-
-    if @user.course_id.to_i == 0
-      random_course = Random.rand(1...4)
-      @user.update(course_id: random_course)
-      @user.save
-      flash[:message] = "Submitted Successfully"
-      redirect to '/account'
-    else
-      redirect to '/account'
-      flash[:message] = "You already assigned course."
-    end
+      @user = current_user
+      if @user.course_id.to_i == 0
+        random_course = Random.rand(1...4)
+        @user.update(course_id: random_course)
+        @user.save
+        flash[:message] = "Submitted Successfully"
+        redirect to '/account'
+      else
+        redirect to '/account'
+        flash[:message] = "You already assigned course."
+      end
   end
 
 end

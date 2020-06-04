@@ -11,17 +11,13 @@ class PostsController < ApplicationController
     end
 
     patch '/edit/:id' do
-        if logged_in?
-            @user = current_user
-            edit_post = Post.find_by_id(params[:id]) 
-            edit_post.user_id == @user.id
-            edit_post.update(title: params[:edit_title], content: params[:edit_content])
-            edit_post.save
-            flash[:message] = "Submitted Successfully"
-            redirect to '/posts'
-        else
-            redirect to '/'
-        end
+        @user = current_user
+        edit_post = Post.find_by_id(params[:id]) 
+        edit_post.user_id == @user.id
+        edit_post.update(title: params[:edit_title], content: params[:edit_content])
+        edit_post.save
+        flash[:message] = "Submitted Successfully"
+        redirect to '/posts'
     end
 
     post '/create' do
