@@ -39,5 +39,5 @@ class AdminController < ApplicationController
       redirect to '/'
     end
   end
- 
+
 end

@@ -9,11 +9,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/uikit.min.js"></script>
     <script src="../js/uikit-icons.min.js"></script>
-    <script>
-    setTimeout(function() {
-    $("#wrap").fadeOut().empty();
-  }, 3000);
-  </script>
+     <script src="../js/main.js"></script>
+  
   </head>
 
     <body>
@@ -21,11 +18,11 @@
       <div class="uk-navbar-left">
         <ul class="uk-navbar-nav">
           <li class="uk-active"><a href="/"><img  width="70" height="70" src="../images/logo.png" ></a></li>
-          <% if logged_in? && @user.course_id > 0 %>
-          <li class="uk-active"><a href="/account">Profile</a></li>
-          <li class="uk-active"><a href="/assignments">Assignment</a></li>
-          <li class="uk-active"><a href="/posts">Board</a></li>
-          <li class="uk-active"><a href="/group">Contact</a></li>
+          <% if logged_in? && @user.course_id.to_i > 0 %>
+            <li class="uk-active"><a href="/account">Profile</a></li>
+            <li class="uk-active"><a href="/assignments">Assignment</a></li>
+            <li class="uk-active"><a href="/posts">Board</a></li>
+            <li class="uk-active"><a href="/group">Contact</a></li>
           <% end %>
         </ul>
       </div>
