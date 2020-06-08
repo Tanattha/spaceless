@@ -1,11 +1,8 @@
 class UsersController < ApplicationController
 
   get "/signup" do
-    if logged_in?
-      redirect to '/account'
-    else
-      erb :index
-    end
+    redirect_if_not_login
+    redirect to '/account'
   end
   
   post '/signup' do
@@ -16,41 +13,36 @@ class UsersController < ApplicationController
       @user = User.create(:first_name => params[:first_name], :last_name => params[:last_name], :username => params[:username], :email => params[:email], :password => params[:password])  
         if @user.save
           session[:user_id] = @user.id
-          if @user.avatar
-            @user.avatar
-          else
+          if !@user.avatar 
             random = Random.rand(1...5)
             @user.update(avatar: "../images/avatars/#{random}.jpg")
             @user.save
           end
+
           flash[:message] = "Created an account Successfully"
           redirect to '/account'
         else
-          erb :'users/signup'
+          flash[:message] = "Username already in used"
+          redirect to '/'
         end
     end
   end
 
   get "/login" do
-    if logged_in?
-      redirect to '/account'
-    else
-      redirect to '/'
-    end
+    redirect_if_not_login
+    redirect to '/account'
   end
 
   post "/login" do
     @user = User.find_by(username:  params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
+      flash[:message] = "logged in Successfully"
       if @user.role_id == 1
-        flash[:message] = "logged in Successfully"
         redirect '/admin'
       else
-        flash[:message] = "logged in Successfully"
         redirect '/account'
       end
-
     else
       flash[:message] = "Invalid username or password. Please Try again."
       redirect '/login'
@@ -64,22 +56,15 @@ class UsersController < ApplicationController
   end
 
   get '/account' do
-    if logged_in?
+      redirect_if_not_login
       @user = current_user
       erb :'users/account'
-    else
-      redirect to '/'
-    end
   end
   
   get "/group" do
-    if logged_in?
       @user = current_user
       @user_group = User.where(course_id: @user.course_id)
       erb :'group/group'
-    else
-      redirect to '/'
-    end
   end
 
   patch '/random/:id' do

@@ -1,27 +1,21 @@
 class AssignmentsController < ApplicationController
     
     get '/assignments' do
-        if logged_in?
-            @user = current_user
-            @course_assignments = @user.course.assignments.where(status: true).order(id: :desc)
-            @exams = @user.course.exams.where(status: true).order(id: :desc)
-            @number_passed_assignments =  @user.user_assignments.where(status: true).size
-            @number_passed_exams = @user.user_exams.where("point > ?", 65).size
-            erb :'assignments/assignment'
-        else
-            redirect to '/'
-        end
+        redirect_if_not_login
+        @user = current_user
+        @course_assignments = @user.course.assignments.where(status: true).order(id: :desc)
+        @exams = @user.course.exams.where(status: true).order(id: :desc)
+        @number_passed_assignments =  @user.user_assignments.where(status: true).size
+        @number_passed_exams = @user.user_exams.where("point > ?", 65).size
+        erb :'assignments/assignment'
     end
 
 
     get '/submit_exam/:id' do
-        if logged_in?
-            @user = current_user          
-            @user_exam = UserExam.find_or_create_by(exam_id: params[:id], user_id: @user.id)
-            erb :'assignments/submit_exam'
-        else
-            redirect to '/'
-        end
+        redirect_if_not_login
+        @user = current_user          
+        @user_exam = UserExam.find_or_create_by(exam_id: params[:id], user_id: @user.id)
+        erb :'assignments/submit_exam'
     end
 
     patch '/exam_random/:id' do
@@ -40,13 +34,11 @@ class AssignmentsController < ApplicationController
       end
 
     get '/edit_assignment/:id' do
-        if logged_in?
-            @user = current_user
-            @assignment = UserAssignment.find_or_create_by(assignment_id: params[:id], user_id: @user.id)
-            erb :'assignments/start_edit_assignment'
-        else
-            redirect to '/'
-        end
+        redirect_if_not_login
+        @user = current_user
+        @assignment = UserAssignment.find_or_create_by(assignment_id: params[:id], user_id: @user.id)
+        erb :'assignments/start_edit_assignment'
+        
       end
 
     
