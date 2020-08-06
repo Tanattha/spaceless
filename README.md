@@ -2,6 +2,8 @@
 
 SPACELESS is a mock up online tutoring application built with Sinatra web framework that allows users to sign up, log in, log out and a fully functional CRUD (C-create, R-read, U-update, D-delete). Designed display with ERB HTML, CSS, JS and UIKIT framework.
 
+<img src="./src/example.png" width="640" height="400" />
+
 ## Video Walkthrough
 
 Click here for video walkthrough: https://youtu.be/UcJmY4EOR-4
