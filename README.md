@@ -6,7 +6,7 @@ SPACELESS is a mock up online tutoring application built with Sinatra web framew
 
 ## Video Walkthrough
 
-Click here for video walkthrough: https://youtu.be/UcJmY4EOR-4
+[CLICK HERE](https://youtu.be/UcJmY4EOR-4)
 
 ## Installation
 
