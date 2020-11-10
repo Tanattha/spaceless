@@ -3,8 +3,8 @@ class AssignmentsController < ApplicationController
     get '/assignments' do
         redirect_if_not_login
         @user = current_user
-        @course_assignments = @user.course.assignments.where(status: true).order(id: :desc)
-        @exams = @user.course.exams.where(status: true).order(id: :desc)
+        @course_assignments = @user.course.assignments.where(status: true)
+        @exams = @user.course.exams.where(status: true)
         @number_passed_assignments =  @user.user_assignments.where(status: true).size
         @number_passed_exams = @user.user_exams.where("point > ?", 65).size
         erb :'assignments/assignment'

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   
   post '/signup' do
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
-      flash[:message] = "All contents can't be blank or Username is already in use."
+      flash[:message] = "All contents can't be blank or Username is already taken."
       redirect to '/signup'
     else
       @user = User.create(:first_name => params[:first_name], :last_name => params[:last_name], :username => params[:username], :email => params[:email], :password => params[:password])  
@@ -19,10 +19,10 @@ class UsersController < ApplicationController
             @user.save
           end
 
-          flash[:message] = "Created an account Successfully"
+          flash[:message] = "Created an account Successfully."
           redirect to '/account'
         else
-          flash[:message] = "Username already in used"
+          flash[:message] = "Username is already taken."
           redirect to '/'
         end
     end
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @user = User.find_by(username:  params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      flash[:message] = "logged in Successfully"
+      flash[:message] = "Login Successfully."
       if @user.role_id == 1
         redirect '/admin'
       else
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
 
   get '/logout' do
       session.destroy
-      flash[:message] = "Logged out successfully."
+      flash[:message] = "Logout Successfully."
       redirect to '/'
   end
 
@@ -73,11 +73,11 @@ class UsersController < ApplicationController
         random_course = Random.rand(1...4)
         @user.update(course_id: random_course)
         @user.save
-        flash[:message] = "Submitted Successfully"
+        flash[:message] = "Submitted Successfully."
         redirect to '/account'
       else
         redirect to '/account'
-        flash[:message] = "You already assigned course."
+        flash[:message] = "You already be assigned."
       end
   end
 
